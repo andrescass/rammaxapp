@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#808080</color>
+    <color name="colorPrimaryDark">#606060</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="backColor">#D4D4D4</color>
+    <color name="dkGreen">#106E1F</color>
+    <color name="ltGreen">#5ACC2C</color>
+    <color name="tableBack">#808080</color>
 
     <color name="led_red">#d50000</color>
     <color name="led_green">#388e3c</color>
@@ -10,7 +15,9 @@
     <color name="led_purple">#6a1b9a</color>
     <color name="led_yellow">#ffeb3b</color>
     <color name="led_white">#ffffff</color>
-    <color name="led_off">#6200EE</color>
+    <color name="led_pink">#D81B60</color>
+    <color name="led_orange">#FF9800</color>
+    <color name="led_off">#d4d4d4</color>
 
 
     <array name="led_colors">
@@ -20,6 +27,8 @@
         <item>@color/led_purple</item>
         <item>@color/led_yellow</item>
         <item>@color/led_white</item>
+        <item>@color/led_orange</item>
+        <item>@color/led_pink</item>
         <item>@color/led_off</item>
     </array>
 </resources>

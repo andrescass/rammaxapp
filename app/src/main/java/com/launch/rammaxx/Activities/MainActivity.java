@@ -9,6 +9,7 @@ import petrov.kristiyan.colorpicker.ColorPicker;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,27 +58,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 
         // Buttons
         final Button startBut = findViewById(R.id.start_but);
-        startBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final int COLOR_DIALOG = 0;
-                ColorPicker colorPicker = new ColorPicker(MainActivity.this);
-                colorPicker.setColors(R.array.led_colors);
-                colorPicker.show();
-                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @Override
-                    public void onChooseColor(int position,int color) {
-
-                    }
-
-                    @Override
-                    public void onCancel(){
-                        // put code
-                    }
-                });
-
-            }
-        });
 
         // Leds
         Button led0But = findViewById(R.id.led_0_but);
@@ -148,7 +128,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
             @Override
             public void onChooseColor(int position, int color) {
-                ledButList.get(ledIdx).setBackgroundColor(color);
+                //ledButList.get(ledIdx).setBackgroundColor(color);
+                ledButList.get(ledIdx).getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
             }
 
             @Override

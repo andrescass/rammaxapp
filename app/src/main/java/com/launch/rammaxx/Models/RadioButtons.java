@@ -154,7 +154,7 @@ public class RadioButtons extends View {
         for(int i = 0; i < mSlices; i++){
             mPaint.setStyle(Paint.Style.FILL);
             //mPaint.setColor(colors[i % colors.length]);
-            mPaint.setColor(Color.GREEN);
+            mPaint.setColor(Color.parseColor("#106E1F"));
             canvas.drawArc(mSliceOval, startAngle, degreeStep, true, mPaint);
 
             mPaint.setStyle(Paint.Style.STROKE);
@@ -169,7 +169,7 @@ public class RadioButtons extends View {
             startAngle = quarterDegreeMinus + (touchedSlice)*degreeStep;
             mPaint.setStyle(Paint.Style.FILL);
             //mPaint.setColor(colors[i % colors.length]);
-            mPaint.setColor(Color.YELLOW);
+            mPaint.setColor(Color.parseColor("#5ACC2C"));
             canvas.drawArc(mSliceOval, startAngle, degreeStep, true, mPaint);
 
             mPaint.setStyle(Paint.Style.STROKE);

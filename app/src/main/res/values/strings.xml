@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Rammaxx</string>
+
+    <string-array name="led_time_v">
+        <item>0s</item>
+        <item>0.5s</item>
+        <item>1s</item>
+        <item>1.5s</item>
+        <item>2s</item>
+        <item>2.5s</item>
+        <item>3s</item>
+        <item>3.5s</item>
+        <item>4s</item>
+        <item>4.5s</item>
+        <item>5s</item>
+    </string-array>
+
+    <string-array name="led_pat">
+        <item>Off</item>
+        <item>Solid</item>
+        <item>Dim Up</item>
+        <item>Dim Down</item>
+        <item>Blink Slow</item>
+        <item>Blink Fast</item>
+    </string-array>
 </resources>
