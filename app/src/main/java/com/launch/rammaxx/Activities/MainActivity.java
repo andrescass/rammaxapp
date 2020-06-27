@@ -2,7 +2,9 @@ package com.launch.rammaxx.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
+import io.realm.Realm;
 import petrov.kristiyan.colorpicker.ColorPicker;
 //import eltos.simpledialogfragment.color.SimpleColorDialog;
 
@@ -12,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,19 +38,34 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     List<Button> ledButList;
     int ledIdx = 0;
 
+    Toolbar toolbar;
+
+    private Realm mRealm;
+
+    private String config_name;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         mContex = this;
+
+        mRealm = Realm.getDefaultInstance();
+
         String[] dummy = new String[]{"a", "b", "c", "c", "c", "c", "c"};
         spinnerColors = new int[]{R.color.led_red, R.color.led_blue, R.color.led_green, R.color.led_yellow,
                 R.color.led_white, R.color.led_off, R.color.led_purple};
 
         LinearLayout dialLay = findViewById(R.id.dial_layout);
         RadioButtons dialButt = new RadioButtons(mContex);
+
+        // Find the toolbar view inside the activity layout
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
 
         //Spinner colorSpinner = findViewById(R.id.col_sp);
 
@@ -186,5 +204,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         public View getView(int position, View convertView, ViewGroup parent) {
             return getCustomView(position, convertView, parent);
         }
+    }
+
+    // Menu icons are inflated just as they were with actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 }

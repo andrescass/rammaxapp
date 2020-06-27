@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Rammaxx</string>
+    <string name="action_load">Load</string>
+    <string name="action_save">Save</string>
 
     <string-array name="led_time_v">
         <item>0s</item>
