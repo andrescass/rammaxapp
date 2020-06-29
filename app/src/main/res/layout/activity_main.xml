@@ -196,6 +196,60 @@
                         android:foregroundGravity="center_horizontal"
                         />
                 </TableRow>
+                <TableRow
+                    android:padding="5dp">
+                    <Spinner
+                        android:id="@+id/led7_sp_t"
+                        android:entries="@array/led_time_v"
+                        android:layout_gravity="center_horizontal"
+                        android:foregroundGravity="center_horizontal"
+                        />
+                    <Button
+                        android:id="@+id/led_7_but"
+                        />
+                    <Spinner
+                        android:id="@+id/led_7_sp_p"
+                        android:entries="@array/led_pat"
+                        android:layout_gravity="center_horizontal"
+                        android:foregroundGravity="center_horizontal"
+                        />
+                </TableRow>
+                <TableRow
+                    android:padding="5dp">
+                    <Spinner
+                        android:id="@+id/led8_sp_t"
+                        android:entries="@array/led_time_v"
+                        android:layout_gravity="center_horizontal"
+                        android:foregroundGravity="center_horizontal"
+                        />
+                    <Button
+                        android:id="@+id/led_8_but"
+                        />
+                    <Spinner
+                        android:id="@+id/led_8_sp_p"
+                        android:entries="@array/led_pat"
+                        android:layout_gravity="center_horizontal"
+                        android:foregroundGravity="center_horizontal"
+                        />
+                </TableRow>
+                <TableRow
+                    android:padding="5dp">
+                    <Spinner
+                        android:id="@+id/led9_sp_t"
+                        android:entries="@array/led_time_v"
+                        android:layout_gravity="center_horizontal"
+                        android:foregroundGravity="center_horizontal"
+                        />
+                    <Button
+                        android:id="@+id/led_9_but"
+                        />
+                    <Spinner
+                        android:id="@+id/led_9_sp_p"
+                        android:entries="@array/led_pat"
+                        android:layout_gravity="center_horizontal"
+                        android:foregroundGravity="center_horizontal"
+                        />
+                </TableRow>
             </TableLayout>
 
             <LinearLayout
@@ -203,8 +257,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:layout_below="@+id/led_table"
                 android:layout_marginTop="20dp"
@@ -219,6 +271,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Start"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ls_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:layout_below="@+id/but_layout"
+                android:layout_marginTop="20dp"
+                >
+                <Button
+                    android:id="@+id/load_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load"/>
+                <Button
+                    android:id="@+id/save_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"/>
+
             </LinearLayout>
 
         </RelativeLayout>

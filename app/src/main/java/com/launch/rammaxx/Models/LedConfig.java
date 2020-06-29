@@ -1,5 +1,7 @@
 package com.launch.rammaxx.Models;
 
+import com.launch.rammaxx.App.RammaxxApp;
+
 import java.util.List;
 
 import io.realm.RealmObject;
@@ -17,8 +19,8 @@ public class LedConfig extends RealmObject {
 
     }
 
-    public LedConfig(int ID, String name, List<Leds> leds) {
-        this.ID = ID;
+    public LedConfig(String name, List<Leds> leds) {
+        this.ID = RammaxxApp.CfgID.incrementAndGet();
         this.name = name;
         this.leds = leds;
     }
