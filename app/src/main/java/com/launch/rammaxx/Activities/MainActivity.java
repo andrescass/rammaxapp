@@ -212,12 +212,20 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             }
         });
 
+        loadBut.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                DeleteCfg();
+                return true;
+            }
+        });
+
         ledColorArray = getResources().getIntArray(R.array.led_colors);
 
         // Start button green
         startBut.getBackground().setColorFilter(getResources().getColor(R.color.butColor), PorterDuff.Mode.MULTIPLY);
         uploadBut.getBackground().setColorFilter(getResources().getColor(R.color.butColor), PorterDuff.Mode.MULTIPLY);
-        startBut.setOnClickListener(new View.OnClickListener() {
+        uploadBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startButTimer.start();
@@ -233,13 +241,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             @Override
             public void onFinish() {
                 if(!onlaunch) {
-                    startBut.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
+                    uploadBut.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
                     onlaunch = true;
                     startButTimer.start();
                 }
                 else
                 {
-                    startBut.getBackground().setColorFilter(getResources().getColor(R.color.butColor),PorterDuff.Mode.MULTIPLY);
+                    uploadBut.getBackground().setColorFilter(getResources().getColor(R.color.butColor),PorterDuff.Mode.MULTIPLY);
                     onlaunch = true;
                     onlaunch = false;
                 }
@@ -248,6 +256,68 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 
         // menu items status
         menuSt = new boolean[]{false, false, false};
+    }
+
+    private void DeleteCfg() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose Configuration to Delete");
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+        final List<String> cfgNames = new ArrayList<>();
+
+        for (String st : readCfgNames(MainActivity.this)
+        ) {
+            arrayAdapter.add(st);
+            cfgNames.add(st);
+        }
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String cfgName = arrayAdapter.getItem(i);
+                final int cfgNameIdx = i;
+                AlertDialog.Builder deleteDialog = new AlertDialog.Builder(MainActivity.this);
+                deleteDialog.setTitle("Deleting" + cfgName);
+                deleteDialog.setMessage("are you sure you want to delete" + cfgName + "?");
+                deleteDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                deleteDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        cfgNames.remove(cfgNameIdx);
+                        try {
+                            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(MainActivity.this.openFileOutput("config.txt", Context.MODE_PRIVATE));
+                            for (String st : cfgNames
+                            ) {
+                                outputStreamWriter.write(st + '\n');
+                            }
+                            outputStreamWriter.close();
+
+                            Toast.makeText(MainActivity.this, "Configuration Deleted", Toast.LENGTH_SHORT).show();
+                        }
+                        catch (IOException e) {
+                            Log.e("Exception", "File write failed: " + e.toString());
+                        }
+
+                    }
+                });
+
+                deleteDialog.show();
+            }
+        });
+
+        builder.show();
     }
 
     private void LoadCfg() {
@@ -485,55 +555,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         });
     }
 
-    public class CustomSpinnerAdapter extends ArrayAdapter {
-
-        private int[] colors;
-
-        public CustomSpinnerAdapter(@NonNull Context context, int resource, @NonNull String[] objects,
-                                    int[] colors) {
-            super(context, resource, objects);
-        }
-
-        public View getCustomView(int position, View convertView,
-                                  ViewGroup parent) {
-
-// Inflating the layout for the custom Spinner
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.color_pick, parent, false);
-
-// Declaring and Typecasting the textview in the inflated layout
-            TextView tvLanguage = (TextView) layout
-                    .findViewById(R.id.col_pick_txt);
-
-// Setting the color of the background
-            tvLanguage.setBackgroundColor(spinnerColors[position]);
-
-// Setting Special atrributes for 1st element
-            if (position == 0) {
-// Setting the size of the text
-                tvLanguage.setTextSize(20f);
-// Setting the text Color
-                tvLanguage.setBackgroundColor(spinnerColors[0]);
-
-            }
-
-            return layout;
-        }
-
-        // It gets a View that displays in the drop down popup the data at the specified position
-        @Override
-        public View getDropDownView(int position, View convertView,
-                                    ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
-        }
-
-        // It gets a View that displays the data at the specified position
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
-        }
-    }
-
     // Menu icons are inflated just as they were with actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -598,106 +619,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-    public class MyAdapter extends ArrayAdapter<MenuSPItem> {
-        private Context mContext;
-        private ArrayList<MenuSPItem> listState;
-        private MyAdapter myAdapter;
-        private boolean isFromView = false;
-
-        public MyAdapter(Context context, int resource, List<MenuSPItem> objects) {
-            super(context, resource, objects);
-            this.mContext = context;
-            this.listState = (ArrayList<MenuSPItem>) objects;
-            this.myAdapter = this;
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView,
-                                    ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
-        }
-
-        public View getCustomView(final int position, View convertView,
-                                  ViewGroup parent) {
-
-            final ViewHolder holder;
-            if (convertView == null) {
-                LayoutInflater layoutInflator = LayoutInflater.from(mContext);
-                convertView = layoutInflator.inflate(R.layout.menu_sp_item, null);
-                holder = new ViewHolder();
-                holder.mTextView = (TextView) convertView
-                        .findViewById(R.id.text);
-                holder.mCheckBox = (CheckBox) convertView
-                        .findViewById(R.id.checkbox);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            holder.mTextView.setText(listState.get(position).getTitle());
-
-            // To check weather checked event fire from getview() or user input
-            isFromView = true;
-            holder.mCheckBox.setChecked(listState.get(position).isSelected());
-            isFromView = false;
-
-            if (!holder.mCheckBox.isChecked()) {
-                holder.mCheckBox.setChecked(true);
-                holder.mTextView.setBackgroundColor(getResources().getColor(R.color.ltGreen));
-            }
-            else
-            {
-                holder.mCheckBox.setChecked(false);
-                holder.mTextView.setBackgroundColor(Color.WHITE);
-            }
-
-            if ((position == 0)) {
-                holder.mCheckBox.setVisibility(View.INVISIBLE);
-            } else {
-                holder.mCheckBox.setVisibility(View.INVISIBLE);
-            }
-            holder.mCheckBox.setTag(position);
-            holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    int getPosition = (Integer) buttonView.getTag();
-
-                    if (!isFromView) {
-                        listState.get(position).setSelected(isChecked);
-                    }
-                }
-            });
-
-            holder.mTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!holder.mCheckBox.isChecked()) {
-                        holder.mCheckBox.setChecked(true);
-                        holder.mTextView.setBackgroundColor(getResources().getColor(R.color.ltGreen));
-                    }
-                    else
-                    {
-                        holder.mCheckBox.setChecked(false);
-                        holder.mTextView.setBackgroundColor(Color.WHITE);
-                    }
-                }
-            });
-            return convertView;
-        }
-
-
-        private class ViewHolder {
-            private TextView mTextView;
-            private CheckBox mCheckBox;
         }
     }
 
