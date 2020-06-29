@@ -3,6 +3,12 @@
     <string name="action_load">Load</string>
     <string name="action_save">Save</string>
 
+    <string name="rocket1">Rocket 1</string>
+    <string name="rocket2">Rocket 2</string>
+    <string name="rocket3">Rocket 3</string>
+    <string name="addrocket">Add Rocket</string>
+    <string name="delrocket">Delete Rocket</string>
+
     <string-array name="led_time_v">
         <item>0s</item>
         <item>0.5s</item>
@@ -15,6 +21,12 @@
         <item>4s</item>
         <item>4.5s</item>
         <item>5s</item>
+        <item>Count Down</item>
+        <item>Launch</item>
+        <item>Ascent</item>
+        <item>Apex</item>
+        <item>Descent</item>
+        <item>Landing</item>
     </string-array>
 
     <string-array name="led_pat">

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#606060</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <color name="butColor">#A4A4A4</color>
     <color name="backColor">#D4D4D4</color>
     <color name="dkGreen">#106E1F</color>
     <color name="ltGreen">#5ACC2C</color>
@@ -15,9 +16,9 @@
     <color name="led_purple">#6a1b9a</color>
     <color name="led_yellow">#ffeb3b</color>
     <color name="led_white">#ffffff</color>
-    <color name="led_pink">#D81B60</color>
+    <color name="led_pink">#E91E63</color>
     <color name="led_orange">#FF9800</color>
-    <color name="led_off">#d4d4d4</color>
+    <color name="led_off">#000000</color>
 
 
     <array name="led_colors">

@@ -7,7 +7,6 @@ import io.realm.annotations.PrimaryKey;
 
 public class Leds extends RealmObject {
 
-    @PrimaryKey
     private int ID;
     private String cfgName;
 
@@ -30,7 +29,16 @@ public class Leds extends RealmObject {
     public Leds(String cfgName, int order, int ledT, int ledC, int ledP) {
         this.ID = RammaxxApp.ledID.incrementAndGet();
         this.cfgName = cfgName;
-        order = order;
+        this.order = order;
+        this.ledT = ledT;
+        this.ledC = ledC;
+        this.ledP = ledP;
+    }
+
+    public Leds(int ID, String cfgName, int order, int ledT, int ledC, int ledP) {
+        this.ID = ID;
+        this.cfgName = cfgName;
+        this.order = order;
         this.ledT = ledT;
         this.ledC = ledC;
         this.ledP = ledP;

@@ -50,7 +50,6 @@
 
             </LinearLayout>
 
-
             <TextView
                 android:id="@+id/led_label"
                 android:layout_width="match_parent"
@@ -273,6 +272,17 @@
                     android:text="Start"/>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/config_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save/Load Configuration"
+                android:textSize="20sp"
+                android:layout_below="@+id/but_layout"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                />
+
             <LinearLayout
                 android:id="@+id/ls_layout"
                 android:layout_width="match_parent"
@@ -281,7 +291,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
-                android:layout_below="@+id/but_layout"
+                android:layout_below="@+id/config_label"
                 android:layout_marginTop="20dp"
                 >
                 <Button

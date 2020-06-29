@@ -47,6 +47,11 @@ public class RadioButtons extends View {
     private float mLatestDownY;
 
     private Canvas mCanvas;
+
+    public int getTouchedSlice() {
+        return touchedSlice;
+    }
+
     private int touchedSlice = 5;
 
     public interface OnSliceClickListener{
@@ -131,7 +136,7 @@ public class RadioButtons extends View {
 
                         double rawSliceIndex = angle / (Math.PI * 2) * mSlices;
 
-                        reDraw((int) rawSliceIndex, mCanvas);
+                        reDraw((int) rawSliceIndex);
 
                         if(mOnSliceClickListener != null){
                             mOnSliceClickListener.onSlickClick((int) rawSliceIndex);
@@ -186,7 +191,7 @@ public class RadioButtons extends View {
         canvas.drawCircle(mCenterX, mCenterY, mInnerRadius, mPaint);
     }
 
-    public void reDraw(int slice, Canvas canvas)
+    public void reDraw(int slice)
     {
         touchedSlice = slice;
         invalidate();
